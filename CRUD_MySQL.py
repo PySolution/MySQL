@@ -5,14 +5,6 @@ import mysql.connector
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtWidgets import *
 
-# CLASSE REFERENTE A JANELA 2
-class Janela2(QMainWindow):
-    def __init__(self):
-        super().__init__()
-
-
-
-# CLASSE REFERENTE A TELA DE CADASTRO
 class JanelaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -47,7 +39,7 @@ class JanelaPrincipal(QMainWindow):
         self.listaGeral()
         self.carregarJanela()
 
-    # CARACTERÍSTICAS DA PRIMEIRA LABEL
+    
     def primeiraLabel(self):
         self.label1 = QtWidgets.QLabel(self)
         self.label1.move(20, 0)
@@ -57,7 +49,7 @@ class JanelaPrincipal(QMainWindow):
         self.label1.setFont(QtGui.QFont("Arial", 14,
                                         QtGui.QFont.Black))
 
-    # CARACTERÍSTICAS DA SEGUNDA LABEL
+    
     def segundaLabel(self):
         self.label2 = QtWidgets.QLabel(self)
         self.label2.move(20, 270)
@@ -167,7 +159,7 @@ class JanelaPrincipal(QMainWindow):
         self.label13.setFont(QtGui.QFont("Arial", 8,
                                         QtGui.QFont.Black))
 
-    # CARACTERÍSTICAS DA PRIMEIR0 BOTÃO
+    
     def primeiroBotao(self):
         self.botao1 = QPushButton("Cadastrar", self)
         self.botao1.move(320, 450)
@@ -176,7 +168,7 @@ class JanelaPrincipal(QMainWindow):
                                         QtGui.QFont.Black))
         self.botao1.clicked.connect(self.cadastrarDados)
 
-    # CARACTERÍSTICAS DA SEGUNDO BOTÃO
+    
     def segundoBotao(self):
         self.botao2 = QPushButton("Visualizar Dados", self)
         self.botao2.move(760, 600)
@@ -225,21 +217,21 @@ class JanelaPrincipal(QMainWindow):
                                         QtGui.QFont.Black))
         self.botao7.clicked.connect(self.atualizarLinha)
 
-    # CARACTERÍSTICAS DA PRIMEIRA LINHA
+   
     def primeiraLinha(self):
         self.linha1 = QLineEdit("", self)
         self.linha1.move(20, 320)
         self.linha1.resize(400, 20)
         self.linha1.setMaxLength(50)
 
-    # CARACTERÍSTICAS DA SEGUNDA LINHA
+   
     def segundaLinha(self):
         self.linha2 = QLineEdit("", self)
         self.linha2.move(20, 370)
         self.linha2.resize(50, 20)
         self.linha2.setMaxLength(3)
 
-    # CARACTERÍSTICAS DA TERCEIRA LINHA
+    
     def terceiraLinha(self):
         self.linha3 = QLineEdit("", self)
         self.linha3.move(20, 420)
