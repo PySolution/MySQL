@@ -1,5 +1,5 @@
 
-# CRUD COM SQLITE3 E PYQT5
+# CRUD COM MySQL E PYQT5
 import sys
 import mysql.connector
 from PyQt5 import QtGui, QtWidgets, QtCore
