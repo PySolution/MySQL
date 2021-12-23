@@ -304,13 +304,6 @@ class JanelaPrincipal(QMainWindow):
             msg.setInformativeText(msgErro)
             x = msg.exec_()
 
-    def acessarBanco(self):
-        print("ok")
-
-    def msg_box001(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("CRUD_MySQL")
-        msg.setText("oi")
 
     def criarTabela(self):
         criar_tabela = self.linha5.text()
