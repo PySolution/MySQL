@@ -10,7 +10,7 @@ class JanelaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
         
-        # CHAMA AS FUNÇÕES QUE SERÃO EXECUTADAS NO INÍCIO CO PROGRAMA
+        # CHAMA AS FUNÇÕES QUE SERÃO EXECUTADAS NO INÍCIO DO PROGRAMA
         self.primeiraLabel()
         self.segundaLabel()
         self.terceiraLabel()
