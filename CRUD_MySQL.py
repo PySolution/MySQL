@@ -299,6 +299,7 @@ class JanelaPrincipal(QMainWindow):
         self.linha8.resize(50, 20)
         self.linha8.setMaxLength(50)
         self.linha8.setPlaceholderText("id")
+        self.linha8.hide()
         
     # FUNÇÃO QUE SETA CARACTERÍSTICAS DA TABELA DE VISUALIZAÇÃO DE CADASTROS
     def listaGeral(self):
