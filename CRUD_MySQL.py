@@ -1,5 +1,5 @@
-
- # CRUD COM MySQL E PYQT5
+ 
+# CRUD COM MySQL E PYQT5
 import sys
 import mysql.connector
 from PyQt5 import QtGui, QtWidgets, QtCore
@@ -39,6 +39,12 @@ class JanelaPrincipal(QMainWindow):
         self.oitavaLinha()
         self.listaGeral()
         self.carregarJanela()
+
+    # CARACTERÍSTICAS DA JANELA 1
+    def carregarJanela(self):
+        self.setGeometry(600, 200, 880, 650)
+        self.setWindowTitle("Janela 1")
+        self.setFixedSize(880, 650)
 
     def primeiraLabel(self):
         self.label1 = QtWidgets.QLabel(self)
@@ -274,12 +280,6 @@ class JanelaPrincipal(QMainWindow):
         self.lista.move(460, 90)
         self.lista.resize(400, 350)
 
-    # CARACTERÍSTICAS DA JANELA 1
-    def carregarJanela(self):
-        self.setGeometry(600, 200, 880, 650)
-        self.setWindowTitle("Janela 1")
-        self.setFixedSize(880, 650)
-
     def criarBanco(self):
         bd = self.linha4.text()
         banco = mysql.connector.connect(
@@ -392,15 +392,25 @@ class JanelaPrincipal(QMainWindow):
             passwd="",
             database=bd
         )
-        cursor = banco.cursor()
-        cursor.execute("SELECT * FROM " + tb + "")
-        dados_lidos = cursor.fetchall()
-        self.lista.setRowCount(len(dados_lidos))
-        self.lista.setColumnCount(4)
+        try:
+            cursor = banco.cursor()
+            cursor.execute("SELECT * FROM " + tb + "")
+            dados_lidos = cursor.fetchall()
+            self.lista.setRowCount(len(dados_lidos))
+            self.lista.setColumnCount(4)
 
-        for i in range(0, len(dados_lidos)):
-            for j in range(0, 4):
-                self.lista.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
+            for i in range(0, len(dados_lidos)):
+                for j in range(0, 4):
+                    self.lista.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
+
+        except mysql.connector.Error as erro4:
+            msg = QMessageBox()
+            msg.setGeometry(1000, 200, 440, 500)
+            msg.setWindowTitle("CRUD_MySQL")
+            msgErro = str(erro4)
+            msg.setInformativeText(msgErro)
+            x = msg.exec_()
+
 
     def apagarDados(self):
         bd = self.linha6.text()
@@ -411,19 +421,30 @@ class JanelaPrincipal(QMainWindow):
             passwd="",
             database=bd
         )
-        cursor = banco.cursor()
-        linha = self.lista.currentRow()
-        self.lista.removeRow(linha)
-        cursor.execute("SELECT id FROM " + tb + "")
-        dados_lidos = cursor.fetchall()
-        valor_id = dados_lidos[linha][0]
-        cursor.execute("DELETE FROM " + tb + " WHERE id = " + str(valor_id))
-        banco.commit()
-        msg = QMessageBox()
-        msg.setGeometry(1000, 200, 440, 500)
-        msg.setWindowTitle("CRUD_MySQL")
-        msg.setInformativeText("Dados apagados com sucesso")
-        x = msg.exec_()
+
+        try:
+            cursor = banco.cursor()
+            linha = self.lista.currentRow()
+            self.lista.removeRow(linha)
+            cursor.execute("SELECT id FROM " + tb + "")
+            dados_lidos = cursor.fetchall()
+            valor_id = dados_lidos[linha][0]
+            cursor.execute("DELETE FROM " + tb + " WHERE id = " + str(valor_id))
+            banco.commit()
+            msg = QMessageBox()
+            msg.setGeometry(1000, 200, 440, 500)
+            msg.setWindowTitle("CRUD_MySQL")
+            msg.setInformativeText("Dados apagados com sucesso")
+            x = msg.exec_()
+
+        except mysql.connector.Error as erro5:
+            msg = QMessageBox()
+            msg.setGeometry(1000, 200, 440, 500)
+            msg.setWindowTitle("CRUD_MySQL")
+            msgErro = str(erro5)
+            msg.setInformativeText(msgErro)
+            x = msg.exec_()
+
 
     def atualizarDados(self):
         linha = self.lista.currentRow()
@@ -436,19 +457,29 @@ class JanelaPrincipal(QMainWindow):
             database=bd
         )
 
-        cursor = banco.cursor()
-        cursor.execute("SELECT id FROM " + tb + "")
-        dados_lidos = cursor.fetchall()
-        valor_id = dados_lidos[linha][0]
-        cursor.execute("SELECT * FROM " + tb + " WHERE id = " + str(valor_id))
-        pessoa = cursor.fetchall()
+        try:
+            cursor = banco.cursor()
+            cursor.execute("SELECT id FROM " + tb + "")
+            dados_lidos = cursor.fetchall()
+            valor_id = dados_lidos[linha][0]
+            cursor.execute("SELECT * FROM " + tb + " WHERE id = " + str(valor_id))
+            pessoa = cursor.fetchall()
 
-        numero_id = valor_id
+            numero_id = valor_id
 
-        self.linha8.setText(str(pessoa[0][0]))
-        self.linha1.setText(str(pessoa[0][1]))
-        self.linha2.setText(str(pessoa[0][2]))
-        self.linha3.setText(str(pessoa[0][3]))
+            self.linha8.setText(str(pessoa[0][0]))
+            self.linha1.setText(str(pessoa[0][1]))
+            self.linha2.setText(str(pessoa[0][2]))
+            self.linha3.setText(str(pessoa[0][3]))
+
+        except mysql.connector.Error as erro6:
+            msg = QMessageBox()
+            msg.setGeometry(1000, 200, 440, 500)
+            msg.setWindowTitle("CRUD_MySQL")
+            msgErro = str(erro6)
+            msg.setInformativeText(msgErro)
+            x = msg.exec_()
+
 
     def atualizarLinha(self):
         bd = self.linha6.text()
@@ -483,12 +514,17 @@ class JanelaPrincipal(QMainWindow):
             msg.setInformativeText("Dados atualizados com sucesso")
             x = msg.exec_()
 
-        except mysql.connector.Error as erro:
-            print(erro)
+        except mysql.connector.Error as erro7:
+            msg = QMessageBox()
+            msg.setGeometry(1000, 200, 440, 500)
+            msg.setWindowTitle("CRUD_MySQL")
+            msgErro = str(erro7)
+            msg.setInformativeText(msgErro)
+            x = msg.exec_()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     tela1 = JanelaPrincipal()
     tela1.show()
-    sys.exit(app.exec_())   
+    sys.exit(app.exec_())
