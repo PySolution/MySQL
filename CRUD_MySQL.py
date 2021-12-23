@@ -21,6 +21,7 @@ class JanelaPrincipal(QMainWindow):
         self.primeiraLinha(), self.segundaLinha(), self.terceiraLinha()
         self.quartaLinha(),  self.quintaLinha(),   self.sextaLinha()
         self.setimaLinha(),  self.oitavaLinha(),   self.listaGeral()
+        
         self.carregarJanela()
 
     # FUNÇÃO QUE SETA CARACTERÍSTICAS DA JANELA PRINCIPAL
