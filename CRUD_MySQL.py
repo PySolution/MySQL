@@ -1,9 +1,10 @@
 
-# CRUD COM MySQL E PYQT5
+ # CRUD COM MySQL E PYQT5
 import sys
 import mysql.connector
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtWidgets import *
+
 
 class JanelaPrincipal(QMainWindow):
     def __init__(self):
@@ -39,7 +40,6 @@ class JanelaPrincipal(QMainWindow):
         self.listaGeral()
         self.carregarJanela()
 
-    
     def primeiraLabel(self):
         self.label1 = QtWidgets.QLabel(self)
         self.label1.move(20, 0)
@@ -49,7 +49,6 @@ class JanelaPrincipal(QMainWindow):
         self.label1.setFont(QtGui.QFont("Arial", 14,
                                         QtGui.QFont.Black))
 
-    
     def segundaLabel(self):
         self.label2 = QtWidgets.QLabel(self)
         self.label2.move(20, 270)
@@ -129,7 +128,7 @@ class JanelaPrincipal(QMainWindow):
         self.label10.setAlignment(QtCore.Qt.AlignLeft)
         self.label10.setText("Digite o nome da tabela de dados:")
         self.label10.setFont(QtGui.QFont("Arial", 8,
-                                        QtGui.QFont.Black))
+                                         QtGui.QFont.Black))
 
     def decimaPrimeiraLabel(self):
         self.label11 = QtWidgets.QLabel(self)
@@ -138,7 +137,7 @@ class JanelaPrincipal(QMainWindow):
         self.label11.setAlignment(QtCore.Qt.AlignLeft)
         self.label11.setText("Lista de Cadastros:")
         self.label11.setFont(QtGui.QFont("Arial", 8,
-                                        QtGui.QFont.Black))
+                                         QtGui.QFont.Black))
 
     def decimaSegundaLabel(self):
         self.label12 = QtWidgets.QLabel(self)
@@ -147,7 +146,7 @@ class JanelaPrincipal(QMainWindow):
         self.label12.setAlignment(QtCore.Qt.AlignLeft)
         self.label12.setText("Buscar informações:")
         self.label12.setFont(QtGui.QFont("Arial", 8,
-                                        QtGui.QFont.Black))
+                                         QtGui.QFont.Black))
 
     def decimaTerceiraLabel(self):
         self.label13 = QtWidgets.QLabel(self)
@@ -157,9 +156,8 @@ class JanelaPrincipal(QMainWindow):
         self.label13.setPixmap(QtGui.QPixmap('py_solution.png'))
         self.label13.setScaledContents(True)
         self.label13.setFont(QtGui.QFont("Arial", 8,
-                                        QtGui.QFont.Black))
+                                         QtGui.QFont.Black))
 
-    
     def primeiroBotao(self):
         self.botao1 = QPushButton("Cadastrar", self)
         self.botao1.move(320, 450)
@@ -168,7 +166,6 @@ class JanelaPrincipal(QMainWindow):
                                         QtGui.QFont.Black))
         self.botao1.clicked.connect(self.cadastrarDados)
 
-    
     def segundoBotao(self):
         self.botao2 = QPushButton("Visualizar Dados", self)
         self.botao2.move(760, 600)
@@ -217,21 +214,18 @@ class JanelaPrincipal(QMainWindow):
                                         QtGui.QFont.Black))
         self.botao7.clicked.connect(self.atualizarLinha)
 
-   
     def primeiraLinha(self):
         self.linha1 = QLineEdit("", self)
         self.linha1.move(20, 320)
         self.linha1.resize(400, 20)
         self.linha1.setMaxLength(50)
 
-   
     def segundaLinha(self):
         self.linha2 = QLineEdit("", self)
         self.linha2.move(20, 370)
         self.linha2.resize(50, 20)
         self.linha2.setMaxLength(3)
 
-    
     def terceiraLinha(self):
         self.linha3 = QLineEdit("", self)
         self.linha3.move(20, 420)
@@ -287,8 +281,7 @@ class JanelaPrincipal(QMainWindow):
         self.setFixedSize(880, 650)
 
     def criarBanco(self):
-        banco = self.linha4.text()
-        bd = (banco)
+        bd = self.linha4.text()
         banco = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -296,7 +289,7 @@ class JanelaPrincipal(QMainWindow):
         )
         try:
             cursor = banco.cursor()
-            cursor.execute("CREATE DATABASE "+bd+"")
+            cursor.execute("CREATE DATABASE " + bd + "")
             msg = QMessageBox()
             msg.setGeometry(1000, 200, 440, 500)
             msg.setWindowTitle("CRUD_MySQL")
@@ -311,29 +304,31 @@ class JanelaPrincipal(QMainWindow):
             msg.setInformativeText(msgErro)
             x = msg.exec_()
 
+    def acessarBanco(self):
+        print("ok")
+
     def msg_box001(self):
         msg = QMessageBox()
         msg.setWindowTitle("CRUD_MySQL")
         msg.setText("oi")
 
     def criarTabela(self):
-        texto2 = self.linha5.text()
-        criar_tabela = (texto2)
+        criar_tabela = self.linha5.text()
         db = self.linha4.text()
         banco = mysql.connector.connect(
             host="localhost",
             user="root",
             passwd="",
-            database = db
+            database=db
         )
 
         try:
             cursor = banco.cursor()
-            cursor.execute("CREATE TABLE "+criar_tabela+" ("
-                                                        "id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-                                                        "nome VARCHAR(255), "
-                                                        "idade INT(3), "
-                                                        "email VARCHAR(255))")
+            cursor.execute("CREATE TABLE " + criar_tabela + " ("
+                                                            "id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+                                                            "nome VARCHAR(255), "
+                                                            "idade INT(3), "
+                                                            "email VARCHAR(255))")
             msg = QMessageBox()
             msg.setGeometry(1000, 200, 440, 500)
             msg.setWindowTitle("CRUD_MySQL")
@@ -349,12 +344,9 @@ class JanelaPrincipal(QMainWindow):
             msg.setInformativeText(msgErro)
             x = msg.exec_()
 
-
     def cadastrarDados(self):
-        banco = self.linha4.text()
-        tabela = self.linha5.text()
-        bd = (banco)
-        tb = (tabela)
+        bd = self.linha4.text()
+        tb = self.linha5.text()
         banco = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -368,7 +360,7 @@ class JanelaPrincipal(QMainWindow):
 
         try:
             cursor = banco.cursor()
-            comando_SQL = "INSERT INTO "+tb+" (nome, idade, email) VALUES (%s,%s,%s)"
+            comando_SQL = "INSERT INTO " + tb + " (nome, idade, email) VALUES (%s,%s,%s)"
             dados = (nome, idade, email)
             msg = QMessageBox()
             msg.setGeometry(1000, 200, 440, 500)
@@ -401,7 +393,7 @@ class JanelaPrincipal(QMainWindow):
             database=bd
         )
         cursor = banco.cursor()
-        cursor.execute("SELECT * FROM "+tb+"")
+        cursor.execute("SELECT * FROM " + tb + "")
         dados_lidos = cursor.fetchall()
         self.lista.setRowCount(len(dados_lidos))
         self.lista.setColumnCount(4)
@@ -422,10 +414,10 @@ class JanelaPrincipal(QMainWindow):
         cursor = banco.cursor()
         linha = self.lista.currentRow()
         self.lista.removeRow(linha)
-        cursor.execute("SELECT id FROM "+tb+"")
+        cursor.execute("SELECT id FROM " + tb + "")
         dados_lidos = cursor.fetchall()
         valor_id = dados_lidos[linha][0]
-        cursor.execute("DELETE FROM "+tb+" WHERE id = " + str(valor_id))
+        cursor.execute("DELETE FROM " + tb + " WHERE id = " + str(valor_id))
         banco.commit()
         msg = QMessageBox()
         msg.setGeometry(1000, 200, 440, 500)
@@ -445,10 +437,10 @@ class JanelaPrincipal(QMainWindow):
         )
 
         cursor = banco.cursor()
-        cursor.execute("SELECT id FROM "+tb+"")
+        cursor.execute("SELECT id FROM " + tb + "")
         dados_lidos = cursor.fetchall()
         valor_id = dados_lidos[linha][0]
-        cursor.execute("SELECT * FROM "+tb+" WHERE id = " + str(valor_id))
+        cursor.execute("SELECT * FROM " + tb + " WHERE id = " + str(valor_id))
         pessoa = cursor.fetchall()
 
         numero_id = valor_id
@@ -468,7 +460,6 @@ class JanelaPrincipal(QMainWindow):
             email1 = self.linha3.text()
             numero_id = self.linha8.text()
 
-
             banco = mysql.connector.connect(
                 host="localhost",
                 user="root",
@@ -477,7 +468,9 @@ class JanelaPrincipal(QMainWindow):
             )
 
             cursor = banco.cursor()
-            cursor.execute("UPDATE "+tb+" SET nome = '{}' , idade = '{}', email= '{}' WHERE id = {}".format(nome1, idade1, email1, numero_id))
+            cursor.execute(
+                "UPDATE " + tb + " SET nome = '{}' , idade = '{}', email= '{}' WHERE id = {}".format(nome1, idade1,
+                                                                                                     email1, numero_id))
             banco.commit()
             banco.close()
             self.linha1.setText("")
@@ -493,9 +486,9 @@ class JanelaPrincipal(QMainWindow):
         except mysql.connector.Error as erro:
             print(erro)
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     tela1 = JanelaPrincipal()
     tela1.show()
-    sys.exit(app.exec_())
-    
+    sys.exit(app.exec_())   
