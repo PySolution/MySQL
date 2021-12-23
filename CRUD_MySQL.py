@@ -493,8 +493,7 @@ class JanelaPrincipal(QMainWindow):
 
             cursor = banco.cursor()
             cursor.execute(
-                "UPDATE " + tb + " SET nome = '{}' , idade = '{}', email= '{}' WHERE id = {}".format(nome1, idade1,
-                                                                                                     email1, numero_id))
+                "UPDATE " + tb + " SET nome = '{}' , idade = '{}', email= '{}' WHERE id = {}".format(nome1, idade1, email1, numero_id))
             banco.commit()
             banco.close()
             self.linha1.setText("")
